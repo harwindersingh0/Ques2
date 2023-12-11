@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Using External XML with CSS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1> XML Example</h1>
+  
+  <!-- Include External XML -->
+  <div id="xmlData"></div>
+
+  <script>
+    // Fetching and parsing XML data
+    fetch('data.xml')
+      .then(response => response.text())
+      .then(data => {
+        // Parsing XML data
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, 'text/xml');
+        
+        // Accessing XML nodes
+        const title = xmlDoc.getElementsByTagName('title')[0].textContent;
+        const content = xmlDoc.getElementsByTagName('content')[0].textContent;
+
+        // Displaying XML content in HTML
+        document.getElementById('xmlData').innerHTML = `
+          <h2>${title}</h2>
+          <p>${content}</p>
+        `;
+      })
+      .catch(error => console.log('Error fetching XML:', error));
+  </script>
+</body>
+
+
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Using External JSON with CSS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1> JSON Example</h1>
+  
+  <!-- Include External JSON -->
+  <div id="jsonData"></div>
+
+  <script>
+    // Fetching JSON data
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        // Accessing JSON data
+        const title = data.title;
+        const content = data.content;
+
+        // Displaying JSON content in HTML
+        document.getElementById('jsonData').innerHTML = `
+          <h2>${title}</h2>
+          <p>${content}</p>
+        `;
+      })
+      .catch(error => console.log('Error fetching JSON:', error));
+  </script>
+</body>
+</html>
